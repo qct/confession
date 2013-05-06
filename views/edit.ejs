@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <form action="/create" method="post" accept-charset="utf-8">
+      <input type="text" name="content" />
+      <input type="submit" value="New">
+    </form>
+
+    <% posts.forEach( function( post ){ %>
+      <p><%= post.content %> | <%= post.updated_at %></p>
+      <% if( post._id == current ){ %>
+        <form action="/update/<%= post._id %>" method="post" accept-charset="utf-8">
+          <input type="text" name="content" value="<%= post.content %>" />
+          <input type="submit" value="提交">
+        </form>
+      <% }else{ %>
+        <a href="/edit/<%= post._id %>" title="Update this post item"><%= post.content %></a>
+      <% } %>
+      <span>
+        <a href="/destroy/<%= post._id %>" title="Delete this post item">Delete</a>
+      </code>
+    <% }); %>
+  </body>
+</html>
