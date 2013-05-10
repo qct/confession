@@ -13,7 +13,7 @@ exports.index = function(req, res, next){
     exec( function ( err, posts, count ){
       if( err ) return next( err );
       res.render( 'index', {
-          title : 'Express Confession',
+          title : 'Confession',
           posts : posts,
           count : count
       });
