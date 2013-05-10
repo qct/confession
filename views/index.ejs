@@ -14,42 +14,41 @@
     <![endif]-->
   </head>
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar">111</span>
-            <span class="icon-bar">222</span>
-            <span class="icon-bar">333</span>
-          </button>
-          <a class="brand" href="#"><%= title%></a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
+    <div class="container-narrow">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <h3 class="muted"><%= title%></h3>
       </div>
-    </div>
 
-    <div class="container">
+      <hr>
 
-      <form action="/create" method="post" accept-charset="utf-8">
-        <input type="text" name="content" />
-        <input type="submit" class="btn  btn-primary" value="New">
-      </form>
+      <div class="container">
 
-      <% posts.forEach( function( post ){ %>
-        <p><%= post.content %> | <%= post.updated_at %></p>
-        <span>
-          <a href="/edit/<%= post._id %>" title="Update this post item" class="btn btn-mini btn-primary">Edit</a>
-        <span>
-        <span>
-          <a href="/destroy/<%= post._id %>" title="Delete this post item" class="btn btn-mini btn-primary">Delete</a>
-      <% }); %>
+        <form action="/create" method="post" accept-charset="utf-8">
+          <input type="text" name="content" />
+          <input type="submit" class="btn  btn-primary" value="New">
+        </form>
 
+        <% posts.forEach( function( post ){ %>
+          <p><%= post.content %> | <%= post.updated_at %></p>
+          <span>
+            <a href="/edit/<%= post._id %>" title="Update this post item" class="btn btn-mini btn-primary">Edit</a>
+          <span>
+          <span>
+            <a href="/destroy/<%= post._id %>" title="Delete this post item" class="btn btn-mini btn-primary">Delete</a>
+        <% }); %>
+
+      </div>
+
+      <hr>
+
+      <div class="footer">
+        <p>&copy; Company 2013</p>
+      </div>
     </div>
 
     <!-- Placed at the end of the document so the pages load faster -->
