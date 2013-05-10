@@ -5,6 +5,8 @@
 var mongoose = require( 'mongoose' );
 var Post     = mongoose.model( 'Post' );
 var utils    = require( 'connect' ).utils;
+var moment = require('moment');
+var utils = require('../utils');
 
 exports.index = function(req, res, next){
   Post.
@@ -12,6 +14,7 @@ exports.index = function(req, res, next){
     sort( '-updated_at' ).
     exec( function ( err, posts, count ){
       if( err ) return next( err );
+      utils.add_formatted_datestr(posts);
       res.render( 'index', {
           title : 'Confession',
           posts : posts,
@@ -49,8 +52,9 @@ exports.edit = function ( req, res, next ){
     sort( '-updated_at' ).
     exec( function ( err, posts ){
       if( err ) return next( err );
+      utils.add_formatted_datestr(posts);
       res.render( 'edit', {
-          title   : 'Express Todo Example',
+          title   : 'Confession',
           posts   : posts,
           current : req.params.id
       });

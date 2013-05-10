@@ -10,6 +10,7 @@
     "ejs": "0.8.3",
     "mongoose": "3.6.9",
     "connect": "*",
-    "less-middleware": "*"
+    "less-middleware": "*",
+    "moment": "2.0.0"
   }
 }

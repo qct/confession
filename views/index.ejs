@@ -34,7 +34,7 @@
         </form>
 
         <% posts.forEach( function( post ){ %>
-          <p><%= post.content %> | <%= post.updated_at %></p>
+          <p><%= post.content %> | <%= post.updated_at_str %></p>
           <span>
             <a href="/edit/<%= post._id %>" title="Update this post item" class="btn btn-mini btn-primary">Edit</a>
           <span>
