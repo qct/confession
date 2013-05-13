@@ -4,9 +4,9 @@
     <title><%= title %></title>
 
     <!-- Le styles -->
-    <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
     <link rel="stylesheet" href="/stylesheets/bootstrap-responsive.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -25,31 +25,43 @@
       </div>
 
       <hr>
-
-      <div class="container">
-
-        <form action="/create" method="post" accept-charset="utf-8">
-          <input type="text" name="content" />
-          <input type="submit" class="btn  btn-primary" value="New">
-        </form>
+      <div class="row">
+        <div class="span7">
+          <form action="/create" method="post" accept-charset="utf-8">
+            <input type="text" name="content" />
+            <input type="submit" class="btn  btn-primary" value="New">
+          </form>
+        </div>
 
         <% posts.forEach( function( post ){ %>
-          <p><%= post.content %> | <%= post.updated_at_str %></p>
+        <div class="span7 well well-small">
+          <div class="span6"><%= post.content %></div>
+          <!-- <hr> -->
+          <div class="span6">
+            <ul class="unstyled inline left-padding0">
+              <li>顶</li>
+              <li>踩</li>
+              <li class="pull-right"><%= post.updated_at_str %></li>
+            </ul>
+          </div>
+        </div>
+        <!-- <div class="span4">
           <span>
             <a href="/edit/<%= post._id %>" title="Update this post item" class="btn btn-mini btn-primary">Edit</a>
           <span>
           <span>
             <a href="/destroy/<%= post._id %>" title="Delete this post item" class="btn btn-mini btn-primary">Delete</a>
+          </span>
+        </div> -->
         <% }); %>
 
-      </div>
-
+        </div>
       <hr>
 
       <div class="footer">
         <p>&copy; Company 2013</p>
       </div>
-    </div>
+      </div>
 
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="/javascript/jquery-1.9.1.min.js"></script>

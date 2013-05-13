@@ -5,7 +5,7 @@
 var mongoose = require( 'mongoose' );
 var Post     = mongoose.model( 'Post' );
 var utils    = require( 'connect' ).utils;
-var moment = require('moment');
+// var moment = require('moment');
 var utils = require('../utils');
 
 exports.index = function(req, res, next){
