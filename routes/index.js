@@ -16,7 +16,7 @@ exports.index = function(req, res, next){
       if( err ) return next( err );
       utils.add_formatted_datestr(posts);
       res.render( 'index', {
-          title : 'Confession',
+          title : '我忏悔 I Confess',
           posts : posts,
           count : count
       });

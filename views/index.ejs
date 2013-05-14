@@ -26,22 +26,22 @@
 
       <hr>
       <div class="row">
-        <div class="span7">
+        <div class="span7  well-small">
           <form action="/create" method="post" accept-charset="utf-8">
-            <input type="text" name="content" />
-            <input type="submit" class="btn  btn-primary" value="New">
+            <textarea name="content" class="input-xlarge span7" id="textarea" rows="3"></textarea>
+            <input type="submit" class="btn  btn-primary" value="我忏悔!">
           </form>
         </div>
 
         <% posts.forEach( function( post ){ %>
         <div class="span7 well well-small">
-          <div class="span6"><%= post.content %></div>
+          <div class="span6 left-margin10"><%= post.content %></div>
           <!-- <hr> -->
-          <div class="span6">
+          <div class="span6 left-margin10">
             <ul class="unstyled inline left-padding0">
-              <li>顶</li>
-              <li>踩</li>
-              <li class="pull-right"><%= post.updated_at_str %></li>
+              <li><a href="#">顶</a></li>
+              <li><a href="#">踩</a></li>
+              <li class="pull-right">发表于 <%= post.updated_at_str %></li>
             </ul>
           </div>
         </div>

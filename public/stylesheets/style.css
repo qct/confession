@@ -48,3 +48,7 @@ body {
 ul.left-padding0 > li {
   padding-left: 0px !important;
 }
+div.left-margin10 {
+  margin-top: 10px;
+  margin-left: 10px;
+}
