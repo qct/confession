@@ -10,6 +10,7 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path');
+  // , moment = require('moment');
 
 var app = express();
 
@@ -23,6 +24,7 @@ app.use( express.cookieParser());
 app.use(express.bodyParser());
 // app.use(express.methodOverride());
 app.use(app.router);
+app.use(require('less-middleware')({ src: __dirname + '/public' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
