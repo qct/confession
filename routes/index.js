@@ -18,9 +18,11 @@ exports.index = function(req, res, next){
       res.render( 'index', {
           title : '我忏悔 I Confess',
           posts : posts,
-          count : count
+          count : count,
+          user: req.user
       });
   });
+
 };
 
 exports.create = function ( req, res, next ){
