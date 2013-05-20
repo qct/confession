@@ -17,7 +17,6 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <p class="navbar-text pull-right">
-          <%= user%>
             <% if(!user) { %>
               <a href="/auth/google">登陆</a>
               <a href="#">注册</a>
@@ -55,7 +54,7 @@
             <ul class="unstyled inline left-padding0">
               <li><a href="#">顶</a></li>
               <li><a href="#">踩</a></li>
-              <li class="pull-right">发表于 <%= post.updated_at_str %></li>
+              <li class="pull-right"><%= (post.author == undefined? '' : post.author)%> 发表于 <%= post.updated_at_str %></li>
             </ul>
           </div>
         </div>

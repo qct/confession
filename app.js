@@ -6,11 +6,11 @@
 require( './db' );
 
 var express = require('express')
-  , util = require('util')
   , passport = require('passport')
+  , util = require('util')
   , GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
   , routes = require('./routes')
-  , user = require('./routes/user')
+  , users = require('./routes/user')
   , http = require('http')
   , path = require('path');
 
@@ -38,15 +38,15 @@ passport.use(new GoogleStrategy({
     // asynchronous verification, for effect...
     // User.findOrCreate({ googleId: profile.id }, function (err, user) {
     //   return done(err, user);
-    // });
+    // });z
     process.nextTick(function () {
       // To keep the example simple, the user's Google profile is returned to
       // represent the logged-in user.  In a typical application, you would want
       // to associate the Google account with a user record in your database,
       // and return that user instead.
-      console.log("acc: " + accessToken);
+/*      console.log("acc: " + accessToken);
       console.log("ref: " + refreshToken);
-      console.log(profile);
+      console.log(profile);*/
       return done(null, profile);
     });
   }
@@ -62,6 +62,7 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.cookieParser());
 app.use(express.bodyParser());
+app.use(express.session({ secret: 'keyboard cat' }));
 // app.use(express.methodOverride());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -75,8 +76,9 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+
 app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/users', users.list);
 
 app.post( '/create', routes.create );
 app.get( '/destroy/:id', routes.destroy );

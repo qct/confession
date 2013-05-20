@@ -6,7 +6,7 @@ var mongoose = require( 'mongoose' );
 var Post     = mongoose.model( 'Post' );
 var utils    = require( 'connect' ).utils;
 // var moment = require('moment');
-var utils = require('../utils');
+var dateUtils = require('../dateUtils');
 
 exports.index = function(req, res, next){
   Post.
@@ -14,7 +14,7 @@ exports.index = function(req, res, next){
     sort( '-updated_at' ).
     exec( function ( err, posts, count ){
       if( err ) return next( err );
-      utils.add_formatted_datestr(posts);
+      dateUtils.add_formatted_datestr(posts);
       res.render( 'index', {
           title : '我忏悔 I Confess',
           posts : posts,
@@ -29,7 +29,8 @@ exports.create = function ( req, res, next ){
   new Post({
     user_id    : req.cookies.user_id,
     content    : req.body.content,
-    updated_at : Date.now()
+    updated_at : Date.now(),
+    author     : req.user.displayName
   }).save( function( err, post, count ){
     if( err ) return next( err );
     res.redirect( '/' );
@@ -54,7 +55,7 @@ exports.edit = function ( req, res, next ){
     sort( '-updated_at' ).
     exec( function ( err, posts ){
       if( err ) return next( err );
-      utils.add_formatted_datestr(posts);
+      dateUtils.add_formatted_datestr(posts);
       res.render( 'edit', {
           title   : 'Confession',
           posts   : posts,
@@ -77,11 +78,10 @@ exports.update = function ( req, res, next ){
   });
 };
 
-// ** 注意!! express 會將 cookie key 轉成小寫 **
+// ** 注意!! express 会将 cookie key 转成小写 **
 exports.current_user = function ( req, res, next ){
   if( !req.cookies.user_id ){
     res.cookie( 'user_id', utils.uid( 32 ));
   }
- 
   next();
 };
