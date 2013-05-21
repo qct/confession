@@ -18,7 +18,7 @@
       <div class="navbar-inner">
         <p class="navbar-text pull-right">
             <% if(!user) { %>
-              <a href="/login">登陆</a>
+              <a href="/auth/google">登陆</a>
               <a href="#">注册</a>
             <% } else { %>
             欢迎您，<%= user.displayName %>
@@ -38,37 +38,26 @@
       </div>
 
       <hr>
-      <div class="row">
-        <div class="span7  well-small">
-          <form action="/create" method="post" accept-charset="utf-8">
-            <textarea name="content" class="input-xlarge span7" id="textarea" rows="3"></textarea>
-            <input type="submit" class="btn  btn-primary" value="我忏悔!">
-          </form>
-        </div>
-
-        <% posts.forEach( function( post ){ %>
-        <div class="span7 well well-small">
-          <div class="span6 left-margin10"><%= post.content %></div>
-          <!-- <hr> -->
-          <div class="span6 left-margin10">
-            <ul class="unstyled inline left-padding0">
-              <li><a href="#">顶</a></li>
-              <li><a href="#">踩</a></li>
-              <li class="pull-right"><%= (post.author == undefined? '' : post.author)%> 发表于 <%= post.updated_at_str %></li>
-            </ul>
-          </div>
-        </div>
-        <!-- <div class="span4">
-          <span>
-            <a href="/edit/<%= post._id %>" title="Update this post item" class="btn btn-mini btn-primary">Edit</a>
-          <span>
-          <span>
-            <a href="/destroy/<%= post._id %>" title="Delete this post item" class="btn btn-mini btn-primary">Delete</a>
-          </span>
-        </div> -->
-        <% }); %>
-
-        </div>
+      <div>
+        <form class="well form-horizontal">
+          <fieldset>
+            <legend>登陆</legend>
+            <div class="control-group">
+              <label class="control-label" for="usernameid">用户名</label>
+              <div class="controls docs-input-sizes">
+                <input id="usernameid" name="username" class="span2" type="text" placeholder="username">
+              </div>
+              <label class="control-label" for="passwordid">密码</label>
+              <div class="controls docs-input-sizes">
+                <input id="passwordid" name="password" class="span2" type="password" placeholder="pwd">
+              </div>
+              <div class="controls docs-input-sizes">
+                <button type="submit" class="btn">登陆</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
       <hr>
 
       <div class="footer">
