@@ -97,6 +97,8 @@ app.get('/auth/google',
 app.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/' }),
   function(req, res) {
+    //这里要做点逻辑：用户从google验证回来之后，把用户的信息写入user表
+    users.writeUserGoogle(req, res, 'google');
     res.redirect('/');
 });
 app.get('/logout', function(req, res){
