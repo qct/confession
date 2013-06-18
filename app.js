@@ -97,12 +97,21 @@ app.get('/auth/google',
 app.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/' }),
   function(req, res) {
+    //这里要做点逻辑：用户从google验证回来之后，把用户的信息写入user表
+    users.writeUserGoogle(req, res, 'google');
+    req.user.loginname = req.user.emails[0].value;
     res.redirect('/');
 });
 app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
+
+//user login
+app.get('/login', users.login);
+app.post('/logincheck', users.logincheck);
+app.get('/signup', users.signup);
+app.post('/signupsave', users.createNormalUser);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

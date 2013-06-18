@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap-responsive.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/javascript/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <p class="navbar-text pull-right">
+            <% if(!user) { %>
+              <a href="/login">登陆</a>
+            <% } else { %>
+            欢迎您，<%= user.displayName %>
+            <a href="/logout">注销</a>
+            <% } %>
+        </p>
+      </div>
+    </div>
+    <div class="container-narrow">
+      <div>
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="/">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <h3 class="muted"><%= title%></h3>
+      </div>
+
+      <hr>
+      <div>
+        <form id="sign_form" class="well form-horizontal" action="/signupsave" method="post">
+          <fieldset>
+            <legend>注册</legend>
+            <div class="control-group">
+              <label class="control-label" for="usernameid">用户名</label>
+              <div class="controls docs-input-sizes">
+                <input id="usernameid" name="username" class="span2" type="text" placeholder="username">
+              </div>
+              <label class="control-label" for="email">邮箱</label>
+              <div class="controls docs-input-sizes">
+                <input id="email" name="email" class="span2" type="text" placeholder="email">
+              </div>
+              <label class="control-label" for="passwordid">密码</label>
+              <div class="controls docs-input-sizes">
+                <input id="passwordid" name="password" class="span2" type="password" placeholder="password">
+              </div>
+              <label class="control-label" for="password2id">密码确认</label>
+              <div class="controls docs-input-sizes">
+                <input id="password2id" name="password2" class="span2" type="password" placeholder="password">
+              </div>
+              <div class="controls docs-input-sizes">
+                <button type="submit" class="btn">注册</button>
+                <button type="reset" class="btn">重置</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+      <div>
+      </div>
+
+      <hr>
+
+      <div class="footer">
+        <p>&copy; Company 2013</p>
+      </div>
+      </div>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="/javascript/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/javascript/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/javascript/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/javascript/messages_zh.js"></script>
+    <script type="text/javascript">
+      var validateRules = {
+        rules: {
+          username: "required",
+          email: {required: true, email: true},
+          password: "required",
+          password2: {required: true, equalTo: "#passwordid"}
+        }
+      };
+      $('#sign_form').validate(validateRules);
+    </script>
+  </body> 
+</html>
