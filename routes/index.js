@@ -26,11 +26,12 @@ exports.index = function(req, res, next){
 };
 
 exports.create = function ( req, res, next ){
+  console.log(req.body.user);
   new Post({
     user_id    : req.cookies.user_id,
     content    : req.body.content,
     updated_at : Date.now(),
-    author     : req.user.displayName
+    author     : req.body.user
   }).save( function( err, post, count ){
     if( err ) return next( err );
     res.redirect( '/' );

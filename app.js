@@ -109,6 +109,7 @@ app.get('/logout', function(req, res){
 
 //user login
 app.get('/login', users.login);
+app.post('/logincheck', users.logincheck);
 app.get('/signup', users.signup);
 app.post('/signupsave', users.createNormalUser);
 

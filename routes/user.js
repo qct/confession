@@ -86,3 +86,31 @@ exports.hasLoginname = function(loginname) {
   });
   return result;
 };
+
+/**
+* user login, check if the user is available then go to index
+*/
+exports.logincheck = function(req, res, next) {
+  var newUser;
+  User.findOne({
+    loginname: req.body.username,
+    pass: req.body.password,
+    sign_way: "own"
+  }).exec(function (err, user) {
+    newUser = user;
+  });
+  
+  Post.
+    find({ user_id : req.cookies.user_id }).
+    sort( '-updated_at' ).
+    exec( function ( err, posts, count ){
+      if( err ) return next( err );
+      dateUtils.add_formatted_datestr(posts);
+      res.render( 'index', {
+          title : '我忏悔 I Confess',
+          posts : posts,
+          count : count,
+          user: newUser
+      });
+  });
+};
