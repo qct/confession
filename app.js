@@ -99,6 +99,7 @@ app.get('/auth/google/callback',
   function(req, res) {
     //这里要做点逻辑：用户从google验证回来之后，把用户的信息写入user表
     users.writeUserGoogle(req, res, 'google');
+    req.user.loginname = req.user.emails[0].value;
     res.redirect('/');
 });
 app.get('/logout', function(req, res){

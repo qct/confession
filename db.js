@@ -9,10 +9,10 @@ var Post = new Schema({
 });
 
 var User = new Schema({
-    name: { type: String, index: true },
-    loginname: { type: String, unique: true },
+    name: { type: String, default: '', index: true },
+    loginname: { type: String, required: true, unique: true },
     pass: { type: String },
-    email: { type: String, unique: true },
+    email: { type: String, required: true, unique: true },
     sign_way: String,
     create_at: { type: Date, default: Date.now },
     update_at: { type: Date, default: Date.now }

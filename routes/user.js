@@ -26,11 +26,18 @@ exports.signup = function(req, res) {
 exports.writeUserGoogle = function(req, res, way) {
   //先查询有没有这个用户存在，不存在才创建
   console.log('create new user from ' + way);
-  this.create(req, res, way);
+
+  console.log
+  if(this.hasLoginname(req.user.emails[0].value)) {
+    console.log('user loginname: ' + req.user.emails[0].value + ' already exist.');
+  }else {
+    this.create(req, res, way);
+  }
 };
 
 exports.create = function(req, res, way, next) {
   new User({
+    loginname: req.user.emails[0].value, 
     name: req.user.displayName, 
     email: req.user.emails[0].value, 
     sign_way: way, 
@@ -68,6 +75,14 @@ exports.createNormalUser = function(req, res, next) {
   });
 };
 
-exports.hasUsername = function() {
-
+/*
+* check if login name has already exist
+* return: boolean
+*/
+exports.hasLoginname = function(loginname) {
+  var result = true;
+  User.count({loginname: loginname}, function(err, doc) {
+    result = (doc < 1 ? false : true);
+  });
+  return result;
 };
