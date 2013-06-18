@@ -109,6 +109,7 @@ app.get('/logout', function(req, res){
 //user login
 app.get('/login', users.login);
 app.get('/signup', users.signup);
+app.post('/signupsave', users.createNormalUser);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

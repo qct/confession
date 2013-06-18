@@ -16,15 +16,6 @@
   <body>
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
-        <p class="navbar-text pull-right">
-            <% if(!user) { %>
-              <a href="/auth/google">登陆</a>
-              <a href="#">注册</a>
-            <% } else { %>
-            欢迎您，<%= user.displayName %>
-            <a href="/logout">注销</a>
-            <% } %>
-        </p>
       </div>
     </div>
     <div class="container-narrow">
@@ -39,24 +30,32 @@
 
       <hr>
       <div>
-        <form class="well form-horizontal">
+        <form id="sign_form" class="well form-horizontal" action="/signupsave" method="post">
           <fieldset>
-            <legend>登陆</legend>
+            <legend>注册</legend>
             <div class="control-group">
               <label class="control-label" for="usernameid">用户名</label>
               <div class="controls docs-input-sizes">
                 <input id="usernameid" name="username" class="span2" type="text" placeholder="username">
               </div>
+              <label class="control-label" for="email">邮箱</label>
+              <div class="controls docs-input-sizes">
+                <input id="email" name="email" class="span2" type="text" placeholder="email">
+              </div>
               <label class="control-label" for="passwordid">密码</label>
               <div class="controls docs-input-sizes">
-                <input id="passwordid" name="password" class="span2" type="password" placeholder="pwd">
+                <input id="passwordid" name="password" class="span2" type="password" placeholder="password">
+              </div>
+              <label class="control-label" for="password2id">密码确认</label>
+              <div class="controls docs-input-sizes">
+                <input id="password2id" name="password2" class="span2" type="password" placeholder="password">
               </div>
               <div class="controls docs-input-sizes">
-                <button type="submit" class="btn">登陆</button>
+                <button type="submit" class="btn">注册</button>
+                <button type="reset" class="btn">重置</button>
               </div>
             </div>
           </fieldset>
-          <a class="btn btn-primary" href="/auth/google">使用Google登录</a>
         </form>
       </div>
 
@@ -73,5 +72,18 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="/javascript/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="/javascript/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/javascript/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/javascript/messages_zh.js"></script>
+    <script type="text/javascript">
+      var validateRules = {
+        rules: {
+          username: "required",
+          email: {required: true, email: true},
+          password: "required",
+          password2: {required: true, equalTo: "#passwordid"}
+        }
+      };
+      $('#sign_form').validate(validateRules);
+    </script>
   </body> 
 </html>
