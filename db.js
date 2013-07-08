@@ -21,4 +21,4 @@ var User = new Schema({
 mongoose.model( 'Post', Post);
 mongoose.model( 'User', User);
  
-mongoose.connect('mongodb://localhost/post');
+mongoose.connect('mongodb://rosegun.com:20000/post');
