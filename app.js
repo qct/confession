@@ -84,6 +84,7 @@ app.post( '/create', routes.create );
 app.get( '/destroy/:id', routes.destroy );
 app.get( '/edit/:id', routes.edit );
 app.post( '/update/:id', routes.update );
+app.get('/show/:id',routes.show);
 
 // user management--google oauth2
 // app.get('/auth/google', passport.authenticate('google'));
@@ -113,6 +114,6 @@ app.post('/logincheck', users.logincheck);
 app.get('/signup', users.signup);
 app.post('/signupsave', users.createNormalUser);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+http.createServer(app).listen(3000, function(){
+  console.log('Express server listening on port 3000' );
 });

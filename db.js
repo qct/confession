@@ -5,7 +5,8 @@ var Post = new Schema({
     user_id    : String,
     content    : String,
     updated_at : Date,
-    author     : String
+    author     : String,
+    id         : Number
 });
 
 var User = new Schema({

@@ -52,6 +52,8 @@ ul.left-padding0 > li {
 div.left-margin10 {
   margin-top: 10px;
   margin-left: 10px;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 /**validation css**/
 label.error {

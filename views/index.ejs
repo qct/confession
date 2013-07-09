@@ -23,6 +23,14 @@
               <a href="/signup">注册</a>
             <% } else { %>
             欢迎您，<%= user.loginname%>
+            <% if(notification){
+              var noteCount=0;
+              for(var i in notification){
+                noteCount+=notification[i].count;
+              }
+             %>
+            [<%=noteCount%>]
+            <% }%>
             &nbsp;
             <a href="/logout">注销</a>
             <%}%>
@@ -55,6 +63,7 @@
 
         <% posts.forEach( function( post ){ %>
         <div class="span7 well well-small">
+          <div class="span6 left-margin10"><%= post.id %></div>
           <div class="span6 left-margin10"><%= post.content %></div>
           <!-- <hr> -->
           <div class="span6 left-margin10">
