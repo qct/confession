@@ -53,6 +53,7 @@ exports.create = function ( req, res, next ){
       content=content.replace(str,"<a href='javascript:void(0);'>" +str+ "</a>")
     });
   }
+  console.log(content);
   console.log(tags);
   idGen(function(ids){
     new Post({

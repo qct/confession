@@ -88,3 +88,9 @@ input.error {
   font-family: "consolas";
   font-size: 14px;
 }
+.muted {
+  font-family: "consolas";
+}
+#textarea {
+  font-family: 'consolas';
+}
