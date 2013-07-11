@@ -7,6 +7,7 @@ var Post     = mongoose.model( 'Post' );
 var utils    = require( 'connect' ).utils;
 // var moment = require('moment');
 var dateUtils = require('../dateUtils');
+var idGen=require('../smodules/idGenerator');
 
 exports.index = function(req, res, next){
   Post.
@@ -19,7 +20,7 @@ exports.index = function(req, res, next){
           title : '我忏悔 I Confess',
           posts : posts,
           count : count,
-          user: req.user,
+          user  : req.user,
           notification:{
             commont:{count:1},
             reply:{count:2},
@@ -43,16 +44,30 @@ exports.show = function( req, res, next ){
 }
 exports.create = function ( req, res, next ){
   console.log(req.body.user);
-  new Post({
-    user_id    : req.cookies.user_id,
-    content    : req.body.content,
-    updated_at : Date.now(),
-    author     : req.body.user,
-    id         : new Date().getTime()
-  }).save( function( err, post, count ){
-    if( err ) return next( err );
-    res.redirect( '/' );
+  var content=req.body.content;
+  var tags_tmp=content.match(/#[^#]*?#/gi);
+  var tags=[];
+  if(tags_tmp){
+    tags_tmp.forEach(function(str){
+      tags.push(str.substring(1,str.length-1));
+      content=content.replace(str,"<a href='javascript:void(0);'>" +str+ "</a>")
+    });
+  }
+  console.log(tags);
+  idGen(function(ids){
+    new Post({
+      user_id    : req.cookies.user_id,
+      content    : content,
+      updated_at : Date.now(),
+      author     : req.body.user,
+      id         : ids.articleid,
+      tags       : tags
+    }).save( function( err, post, count ){
+      if( err ) return next( err );
+      res.redirect( '/' );
+    });
   });
+  
 };
 
 exports.destroy = function ( req, res, next ){

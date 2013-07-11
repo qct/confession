@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/stylesheets/bootstrap-responsive.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
 
+
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="/javascript/html5shiv.js"></script>
@@ -63,14 +64,18 @@
 
         <% posts.forEach( function( post ){ %>
         <div class="span7 well well-small">
-          <div class="span6 left-margin10"><%= post.id %></div>
-          <div class="span6 left-margin10"><%= post.content %></div>
+          <div class="span6 left-margin2"><a href="javascript:void(0);show(<%= post.id %>);">{<%= post.id %>}</a></div>
+          <div id="content" class="span6 left-margin10">
+            <%- post.content %>
+          </div>
           <!-- <hr> -->
           <div class="span6 left-margin10">
             <ul class="unstyled inline left-padding0">
-              <li><a href="#">顶</a></li>
-              <li><a href="#">踩</a></li>
-              <li class="pull-right"><%= (post.author == undefined? '' : post.author)%> 发表于 <%= post.updated_at_str %></li>
+              <li><a href="javascript:void(0);">顶</a></li>
+              <li><a href="javascript:void(0);">踩</a></li>
+              
+              <li><a href="javascript:void(0);">删</a></li>
+              <li class="pull-right font-grey" ><%= (post.author == undefined? '' : post.author)%> 发表于 <%= post.updated_at_str %></li>
             </ul>
           </div>
         </div>

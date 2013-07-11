@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var User     = mongoose.model('User');
 var Post     = mongoose.model( 'Post' );
 var dateUtils = require('../dateUtils');
-
+var idGen=require('../smodules/idGenerator');
 exports.list = function(req, res){
   res.send("respond with a resource");
 };

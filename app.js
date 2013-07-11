@@ -4,7 +4,6 @@
  */
 // 设定 mongoose
 require( './db' );
-
 var express = require('express')
   , passport = require('passport')
   , util = require('util')
@@ -12,6 +11,7 @@ var express = require('express')
   , routes = require('./routes')
   , users = require('./routes/user')
   , http = require('http')
+  , escapehtml=require('./smiddleware/escapehtml')
   , path = require('path');
 
   // , moment = require('moment');
@@ -66,6 +66,7 @@ app.use(express.session({ secret: 'keyboard cat' }));
 // app.use(express.methodOverride());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(escapehtml);
 app.use(app.router);
 app.use(require('less-middleware')({ src: __dirname + '/public' }));
 app.use(express.static(path.join(__dirname, 'public')));

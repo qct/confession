@@ -9,10 +9,11 @@ a {
   color: #00B7FF;
 }
 **/
-body {
-  padding-top: 60px;
-  /* 60px to make the container go all the way to the bottom of the topbar */
-
+.font-tiny {
+  font-size: 12px;
+}
+.font-grey {
+  color: #999999;
 }
 body {
   padding-top: 50px;
@@ -22,6 +23,10 @@ body {
 .container-narrow {
   margin: 0 auto;
   max-width: 700px;
+}
+.right-banner {
+  margin: 0 auto;
+  max-width: 200px;
 }
 .container-narrow > hr {
   margin: 30px 0;
@@ -48,6 +53,13 @@ body {
 }
 ul.left-padding0 > li {
   padding-left: 0px !important;
+  font-size: 12px;
+}
+div.left-margin2 {
+  margin-top: 5px;
+  margin-left: 2px;
+  font-family: "consolas";
+  font-size: 12px;
 }
 div.left-margin10 {
   margin-top: 10px;
@@ -67,4 +79,12 @@ input.error {
   background-color: #FFFFD5;
   margin: 0px;
   color: red;
+}
+.tinyfont {
+  font-size: 10px;
+}
+#content {
+  padding: 10px;
+  font-family: "consolas";
+  font-size: 14px;
 }

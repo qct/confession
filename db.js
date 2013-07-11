@@ -1,4 +1,4 @@
-﻿var mongoose = require( 'mongoose' );
+var mongoose = require( 'mongoose' );
 var Schema   = mongoose.Schema;
  
 var Post = new Schema({
@@ -6,8 +6,10 @@ var Post = new Schema({
     content    : String,
     updated_at : Date,
     author     : String,
-    id         : Number
+    id         : Number,
+    tags       : Array
 });
+
 
 var User = new Schema({
     name: { type: String, default: '', index: true },
@@ -18,7 +20,7 @@ var User = new Schema({
     create_at: { type: Date, default: Date.now },
     update_at: { type: Date, default: Date.now }
 });
- 
+
 mongoose.model( 'Post', Post);
 mongoose.model( 'User', User);
  
