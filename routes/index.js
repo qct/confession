@@ -10,6 +10,7 @@ var dateUtils = require('../dateUtils');
 var idGen=require('../smodules/idGenerator');
 
 exports.index = function(req, res, next){
+ 
   Post.
     find({ user_id : req.cookies.user_id }).
     sort( '-updated_at' ).
@@ -50,7 +51,6 @@ exports.create = function ( req, res, next ){
   if(tags_tmp){
     tags_tmp.forEach(function(str){
       tags.push(str.substring(1,str.length-1));
-      content=content.replace(str,"<a href='javascript:void(0);'>" +str+ "</a>")
     });
   }
   console.log(content);

@@ -66,6 +66,12 @@
         <div class="span7 well well-small">
           <div class="span6 left-margin2"><a href="javascript:void(0);show(<%= post.id %>);">{<%= post.id %>}</a></div>
           <div id="content" class="span6 left-margin10">
+            <%
+              var tags_tmp=post.content.match(/#[^#]*?#/gi);
+              for(var k in tags_tmp){
+                post.content=post.content.replace(tags_tmp[k],"<a href='http://localhost:3000/search?tag="+encodeURIComponent(tags_tmp[k].substring(1,tags_tmp[k].length-1))+"'>" +tags_tmp[k]+ "</a>")
+              }
+            %>
             <%- post.content %>
           </div>
           <!-- <hr> -->

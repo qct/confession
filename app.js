@@ -115,6 +115,13 @@ app.post('/logincheck', users.logincheck);
 app.get('/signup', users.signup);
 app.post('/signupsave', users.createNormalUser);
 
+
+
+
+app.use(function(req,res){
+  res.statusCode=404;
+  res.send("<body align='center'><span style='font-weight:bold;font-family:consolas;font-size:50px;color:red;'>404!!</span><hr/><br/><img src='images/404.jpg' style='border:0px;'/></body>")
+})
 http.createServer(app).listen(3000, function(){
   console.log('Express server listening on port 3000' );
 });
