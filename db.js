@@ -7,7 +7,8 @@ var Post = new Schema({
     updated_at : Date,
     author     : String,
     id         : Number,
-    tags       : Array
+    tags       : Array,
+    keywords   : Array
 });
 
 

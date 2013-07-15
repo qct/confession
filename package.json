@@ -13,6 +13,7 @@
     "less-middleware": "*",
     "moment": "2.0.0",
     "passport": "0.1.17",
-    "passport-google-oauth": ">= 0.0.0"
+    "passport-google-oauth": ">= 0.0.0",
+    "segment": ">= 0.0.0"
   }
 }
