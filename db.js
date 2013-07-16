@@ -11,6 +11,13 @@ var Post = new Schema({
     keywords   : Array
 });
 
+var Comment = new Schema({
+    user_id   : String,
+    content   : String,
+    update_at : Date,
+    author    : String,
+    post_id   : Number
+});
 
 var User = new Schema({
     name: { type: String, default: '', index: true },
@@ -24,5 +31,6 @@ var User = new Schema({
 
 mongoose.model( 'Post', Post);
 mongoose.model( 'User', User);
+mongoose.model( 'Comment', Comment);
  
 mongoose.connect('mongodb://rosegun.com:20000/post');

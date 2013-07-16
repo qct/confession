@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
     <link rel="stylesheet" href="/stylesheets/bootstrap-responsive.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript" src="/javascript/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/javascript/main.js"></script>
 
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -64,7 +66,7 @@
 
         <% posts.forEach( function( post ){ %>
         <div class="span7 well well-small">
-          <div class="span6 left-margin2"><a href="javascript:void(0);show(<%= post.id %>);">{<%= post.id %>}</a></div>
+          <div class="span6 left-margin2"><a href="javascript:void(0);show(<%= post.id %>);" postid="<%= post.id %>" class="post">{<%= post.id %>}</a></div>
           <div id="content" class="span6 left-margin10">
             <%
               var tags_tmp=post.content.match(/#[^#]*?#/gi);
@@ -81,8 +83,21 @@
               <li><a href="javascript:void(0);">踩</a></li>
               
               <li><a href="javascript:void(0);">删</a></li>
+              <li><a href="javascript:void(0);comment.send(<%=post.id%>)">评</a></li>
               <li class="pull-right font-grey" ><%= (post.author == undefined? '' : post.author)%> 发表于 <%= post.updated_at_str %></li>
             </ul>
+          </div>
+          <div class="span6 left-margin10" style="display:none;" id="cc_<%=post.id%>">
+            <div class="span6 left-margin10">
+              <textarea name="comment" class="input-xlarge span6" id="commentArea" rows="1"></textarea>
+              <a href="javascript:void(0);comment.active(<%=post.id%>)" class="btn pull-right btn-primary" >评论</a> 
+              
+            </div>
+
+            <div class="span6 left-margin10">
+              test
+              <hr style="border:1px solid #DDDDDD;"/>
+            </div>
           </div>
         </div>
         <!-- <div class="span4">

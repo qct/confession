@@ -4,6 +4,7 @@
  */
 var mongoose = require( 'mongoose' );
 var Post     = mongoose.model( 'Post' );
+var Comment  = mongoose.model('Comment');
 var utils    = require( 'connect' ).utils;
 // var moment = require('moment');
 var dateUtils = require('../dateUtils');
@@ -44,6 +45,7 @@ exports.show = function( req, res, next ){
   }
 }
 exports.create = function ( req, res, next ){
+ 
   console.log(req.body.user);
   var content=req.body.content;
   var tags_tmp=content.match(/#[^#]*?#/gi);
@@ -72,8 +74,9 @@ exports.create = function ( req, res, next ){
 };
 
 exports.destroy = function ( req, res, next ){
+   
   Post.findById( req.params.id, function ( err, post ){
-    if( post.user_id !== req.cookies.user_id ){
+  if( post.user_id !== req.cookies.user_id ){
       return utils.forbidden( res );
     }
     post.remove( function ( err, post ){
@@ -84,10 +87,14 @@ exports.destroy = function ( req, res, next ){
 };
 
 exports.edit = function ( req, res, next ){
+   
   Post.
     find({ user_id : req.cookies.user_id }).
     sort( '-updated_at' ).
     exec( function ( err, posts ){
+      if( post.user_id !== req.cookies.user_id ){
+      return utils.forbidden( res );
+    }
       if( err ) return next( err );
       dateUtils.add_formatted_datestr(posts);
       res.render( 'edit', {
@@ -99,10 +106,11 @@ exports.edit = function ( req, res, next ){
 };
 
 exports.update = function ( req, res, next ){
-  Post.findById( req.params.id, function ( err, post ){
-    if( post.user_id !== req.cookies.user_id ){
+  if( post.user_id !== req.cookies.user_id ){
       return utils.forbidden( res );
     }
+  Post.findById( req.params.id, function ( err, post ){
+    
     post.content    = req.body.content;
     post.updated_at = Date.now();
     post.save( function ( err, post, count ){
@@ -112,10 +120,16 @@ exports.update = function ( req, res, next ){
   });
 };
 
+exports.comment = function(req,res,next){
+  var reqObj=req.body;
+  console.log(reqObj);
+  Comment
+};
+
 // ** 注意!! express 会将 cookie key 转成小写 **
 exports.current_user = function ( req, res, next ){
   if( !req.cookies.user_id ){
     res.cookie( 'user_id', utils.uid( 32 ));
   }
-  next();
+
 };

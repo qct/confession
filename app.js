@@ -12,6 +12,7 @@ var express = require('express')
   , users = require('./routes/user')
   , http = require('http')
   , escapehtml=require('./smiddleware/escapehtml')
+  , checkuser=require('./smiddleware/checkuser.js')
   , path = require('path');
 
   // , moment = require('moment');
@@ -67,6 +68,7 @@ app.use(express.session({ secret: 'keyboard cat' }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(escapehtml);
+app.use(checkuser);
 app.use(app.router);
 app.use(require('less-middleware')({ src: __dirname + '/public' }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -86,6 +88,7 @@ app.get( '/destroy/:id', routes.destroy );
 app.get( '/edit/:id', routes.edit );
 app.post( '/update/:id', routes.update );
 app.get('/show/:id',routes.show);
+app.all('/comment',routes.comment)
 
 // user management--google oauth2
 // app.get('/auth/google', passport.authenticate('google'));
