@@ -8,7 +8,7 @@ module.exports=function(req,res,next){
 			}
 		}
 	});
-	
+
 	if(needToRd){
 		var ref=req.headers.referer;
 		res.send({result:false,code:100001,des:"Failed!Need login first."});

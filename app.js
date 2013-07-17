@@ -9,12 +9,18 @@ var express = require('express')
   , util = require('util')
   , GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
   , routes = require('./routes')
+  , comment = require('./routes/comment')
   , users = require('./routes/user')
   , http = require('http')
   , escapehtml=require('./smiddleware/escapehtml')
   , checkuser=require('./smiddleware/checkuser.js')
   , path = require('path');
 
+global.urls={
+  tags:"http://localhost:3000/search?tag=",
+  people:"http://localhost:3000/u/",
+  post:"http://localhost:3000/post/"
+}
   // , moment = require('moment');
 
 // API Access link for creating client ID and secret:
@@ -88,7 +94,8 @@ app.get( '/destroy/:id', routes.destroy );
 app.get( '/edit/:id', routes.edit );
 app.post( '/update/:id', routes.update );
 app.get('/show/:id',routes.show);
-app.all('/comment',routes.comment)
+app.all('/comment',comment.active)
+app.all('/comment/show',comment.show)
 
 // user management--google oauth2
 // app.get('/auth/google', passport.authenticate('google'));
@@ -109,6 +116,7 @@ app.get('/auth/google/callback',
 });
 app.get('/logout', function(req, res){
   req.logout();
+  res.clearCookie("sid");
   res.redirect('/');
 });
 
@@ -123,7 +131,7 @@ app.post('/signupsave', users.createNormalUser);
 
 app.use(function(req,res){
   res.statusCode=404;
-  res.send("<body align='center'><span style='font-weight:bold;font-family:consolas;font-size:50px;color:red;'>404!!</span><hr/><br/><img src='images/404.jpg' style='border:0px;'/></body>")
+  res.send("<body align='center'><span style='font-weight:bold;font-family:consolas;font-size:50px;color:red;'>404!!</span><hr/><br/><img src='/images/404.jpg' style='border:0px;'/></body>")
 })
 http.createServer(app).listen(3000, function(){
   console.log('Express server listening on port 3000' );

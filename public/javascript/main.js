@@ -8,6 +8,27 @@ comment.send=function(id){
 	}else{
 		comment.status=true;
 		$(ccId).show();
+		$.ajax({
+			url:"comment/show",
+			data:{post_id:id},
+			async:true,
+			type:"POST",
+			success:function(data){
+				var frag = $(document.createDocumentFragment());
+				
+				for(var k in data){
+					frag.append("@"+data[k].author+":"+data[k].content).append($("<hr/>").css("border","1px solid #DDDDDD"));
+						
+				}
+				$("#comment_"+id).empty().append(frag);
+				/*
+ <div class="span6 left-margin10">
+              <hr style="border:1px solid #DDDDDD;"/>
+            </div>
+				*/
+			}
+
+		});
 	}
 }
 
@@ -20,7 +41,7 @@ $(document).ready(function(){
 comment.active=function(id){
 	$.ajax({
 		url:"comment",
-		data:{content:$("#commentArea").val(),post_id:id},
+		data:{content:$("#commentArea_"+id).val(),post_id:id},
 		async:true,
 		type: 'POST',
 		success:function(data){

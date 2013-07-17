@@ -17,7 +17,7 @@
     <![endif]-->
   </head>
   <body>
-    <div class="navbar navbar-fixed-top" >
+    <div  class="navbar navbar-fixed-top" >
       <div class="navbar-inner" style="padding-right:15px;">
         <p class="navbar-text pull-right">
             <% if(!user) { %>
@@ -68,12 +68,7 @@
         <div class="span7 well well-small">
           <div class="span6 left-margin2"><a href="javascript:void(0);show(<%= post.id %>);" postid="<%= post.id %>" class="post">{<%= post.id %>}</a></div>
           <div id="content" class="span6 left-margin10">
-            <%
-              var tags_tmp=post.content.match(/#[^#]*?#/gi);
-              for(var k in tags_tmp){
-                post.content=post.content.replace(tags_tmp[k],"<a href='http://localhost:3000/search?tag="+encodeURIComponent(tags_tmp[k].substring(1,tags_tmp[k].length-1))+"'>" +tags_tmp[k]+ "</a>")
-              }
-            %>
+           
             <%- post.content %>
           </div>
           <!-- <hr> -->
@@ -89,14 +84,12 @@
           </div>
           <div class="span6 left-margin10" style="display:none;" id="cc_<%=post.id%>">
             <div class="span6 left-margin10">
-              <textarea name="comment" class="input-xlarge span6" id="commentArea" rows="1"></textarea>
-              <a href="javascript:void(0);comment.active(<%=post.id%>)" class="btn pull-right btn-primary" >评论</a> 
-              
+              <textarea name="comment" class="input-xlarge span6" id="commentArea_<%post.id%>" rows="1"></textarea>
+              <a href="javascript:void(0);comment.active(<%=post.id%>)" class="btn pull-right btn-primary" >评论</a>        
             </div>
 
-            <div class="span6 left-margin10">
-              test
-              <hr style="border:1px solid #DDDDDD;"/>
+            <div class="span6 left-margin10" id="comment_<%=post.id%>">
+             
             </div>
           </div>
         </div>
@@ -114,7 +107,7 @@
       <hr>
 
       <div class="footer">
-        <p>&copy; Company 2013</p>
+        <p>&copy; Copyright 2013 Rosegun</p>
       </div>
       </div>
 
