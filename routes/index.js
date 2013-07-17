@@ -121,9 +121,10 @@ exports.update = function ( req, res, next ){
 };
 
 exports.comment = function(req,res,next){
+  console.log("Enter into comment.");
   var reqObj=req.body;
   console.log(reqObj);
-  Comment
+  res.send({test:"测试"});
 };
 
 // ** 注意!! express 会将 cookie key 转成小写 **

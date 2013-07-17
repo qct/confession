@@ -12,7 +12,6 @@ comment.send=function(id){
 }
 
 $(document).ready(function(){
-
 	$(".post").on('mouseover',function(){
 		var post_id=$(this).attr("postid");
 	});
@@ -25,6 +24,6 @@ comment.active=function(id){
 		async:true,
 		type: 'POST',
 		success:function(data){
-		alert(data.test);
+		alert(data.des);
 	}});
 }

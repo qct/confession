@@ -12,6 +12,7 @@ exports.list = function(req, res){
 };
 
 exports.login = function(req, res) {
+  res.cookie("sid",req.user,{path:"/",maxAge:"1800000",secure:true})
   res.render('login', {
     title : '我忏悔 I Confess',
     user: req.user});
@@ -27,7 +28,6 @@ exports.writeUserGoogle = function(req, res, way) {
   //先查询有没有这个用户存在，不存在才创建
   console.log('create new user from ' + way);
 
-  console.log
   if(this.hasLoginname(req.user.emails[0].value)) {
     console.log('user loginname: ' + req.user.emails[0].value + ' already exist.');
   }else {
