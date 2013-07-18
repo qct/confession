@@ -22,7 +22,6 @@ exports.show=function(req,res,next){
 	.exec(function(err,comments,count){
 		var obj=[];
 		
-		console.log(comments);
 		comments.forEach(function(comment){
 			dateUtils.update_content(comment);
 			dateUtils.add_datestr(comment);
@@ -30,7 +29,7 @@ exports.show=function(req,res,next){
 			var c={};
 			c.content=comment.content || "什么都没有说";
 			c.update_at=comment.update_at;
-			c.author=comment.author || "无名氏";
+			c.author="<a href='"+global.urls.people+encodeURIComponent(comment.author)+"'>@"+comment.author+"</a>" || "<a href='"+global.urls.people+encodeURIComponent("无名氏")+"'>@"+"无名氏"+"</a>";
 			c.update_at_str=comment.update_at_str || "很久之前";
 			obj.push(c);
 		});

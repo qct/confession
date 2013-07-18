@@ -20,7 +20,8 @@ comment.send=function(id){
 					var ul=$("<ul/>").addClass("unstyled inline left-padding0");
 					ul.append("<li/>").append("<a href=javascript:void(0);>回复</a>");
 					ul.append("<li/>").addClass("pull-right font-grey").append(data[k].update_at_str);
-					frag.append("@"+data[k].author+":"+data[k].content)
+				
+					frag.append(data[k].author+":"+data[k].content)
 					.append(ul)
 					.append($("<hr/>").css("border","1px solid #DDDDDD"));
 						
