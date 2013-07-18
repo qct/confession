@@ -17,9 +17,9 @@ var express = require('express')
   , path = require('path');
 
 global.urls={
-  tags:"http://localhost:3000/t/",
-  people:"http://localhost:3000/u/",
-  posts:"http://localhost:3000/p/"
+  tags:"http://www.rosegun.com/t/",
+  people:"http://www.rosegun.com/u/",
+  posts:"http://www.rosegun.com/p/"
 }
   // , moment = require('moment');
 
@@ -132,7 +132,7 @@ app.post('/signupsave', users.createNormalUser);
 app.use(function(req,res){
   res.statusCode=404;
   res.send("<body align='center'><span style='font-weight:bold;font-family:consolas;font-size:50px;color:red;'>404!!</span><hr/><br/><img src='/images/404.jpg' style='border:0px;'/></body>")
-})
+});
 http.createServer(app).listen(80, function(){
   console.log('Express server listening on port 80' );
 });
