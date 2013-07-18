@@ -17,9 +17,9 @@ var express = require('express')
   , path = require('path');
 
 global.urls={
-  tags:"http://localhost:3000/search?tag=",
+  tags:"http://localhost:3000/t/",
   people:"http://localhost:3000/u/",
-  post:"http://localhost:3000/post/"
+  posts:"http://localhost:3000/p/"
 }
   // , moment = require('moment');
 

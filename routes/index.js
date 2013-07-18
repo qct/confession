@@ -14,10 +14,11 @@ exports.index = function(req, res, next){
  
   Post.
     find({ user_id : req.cookies.user_id }).
-    sort( '-updated_at' ).
+    sort( '-update_at' ).
     exec( function ( err, posts, count ){
       if( err ) return next( err );
-      dateUtils.add_formatted_datestr(posts);
+      //dateUtils.add_formatted_datestr(posts);
+      dateUtils.update_contents(posts);
       res.render( 'index', {
           title : '我忏悔 I Confess',
           posts : posts,
@@ -46,7 +47,7 @@ exports.show = function( req, res, next ){
 }
 exports.create = function ( req, res, next ){
  
-  console.log(req.body.user);
+  console.log(Date.now());
   var content=req.body.content;
   var tags_tmp=content.match(/#[^#]*?#/gi);
   var tags=[];
@@ -61,7 +62,7 @@ exports.create = function ( req, res, next ){
     new Post({
       user_id    : req.cookies.user_id,
       content    : content,
-      updated_at : Date.now(),
+      update_at  : Date.now(),
       author     : req.body.user,
       id         : ids.articleid,
       tags       : tags
@@ -90,7 +91,7 @@ exports.edit = function ( req, res, next ){
    
   Post.
     find({ user_id : req.cookies.user_id }).
-    sort( '-updated_at' ).
+    sort( '-update_at' ).
     exec( function ( err, posts ){
       if( post.user_id !== req.cookies.user_id ){
       return utils.forbidden( res );
@@ -112,7 +113,7 @@ exports.update = function ( req, res, next ){
   Post.findById( req.params.id, function ( err, post ){
     
     post.content    = req.body.content;
-    post.updated_at = Date.now();
+    post.update_at = Date.now();
     post.save( function ( err, post, count ){
       if( err ) return next( err );
       res.redirect( '/' );

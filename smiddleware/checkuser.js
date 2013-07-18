@@ -1,8 +1,8 @@
 module.exports=function(req,res,next){
-	var paths=["/comment","/create","/update","/destroy","/edit"];
+	var paths=[];
 	var needToRd=false;
 	paths.forEach(function(e){
-		if(req.path.indexOf(e)==0){
+		if(e.test(req.path)){
 			if(!req.cookies.sid){
 				needToRd=true;
 			}

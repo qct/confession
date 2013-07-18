@@ -15,9 +15,14 @@ comment.send=function(id){
 			type:"POST",
 			success:function(data){
 				var frag = $(document.createDocumentFragment());
-				
+				console.log(data);
 				for(var k in data){
-					frag.append("@"+data[k].author+":"+data[k].content).append($("<hr/>").css("border","1px solid #DDDDDD"));
+					var ul=$("<ul/>").addClass("unstyled inline left-padding0");
+					ul.append("<li/>").append("<a href=javascript:void(0);>回复</a>");
+					ul.append("<li/>").addClass("pull-right font-grey").append(data[k].update_at_str);
+					frag.append("@"+data[k].author+":"+data[k].content)
+					.append(ul)
+					.append($("<hr/>").css("border","1px solid #DDDDDD"));
 						
 				}
 				$("#comment_"+id).empty().append(frag);
@@ -30,7 +35,7 @@ comment.send=function(id){
 
 		});
 	}
-}
+};
 
 $(document).ready(function(){
 	$(".post").on('mouseover',function(){
@@ -39,6 +44,8 @@ $(document).ready(function(){
 });
 
 comment.active=function(id){
+	console.log($("#commentArea_"+id));
+	console.log($("#commentArea_"+id).val());
 	$.ajax({
 		url:"comment",
 		data:{content:$("#commentArea_"+id).val(),post_id:id},
@@ -47,4 +54,4 @@ comment.active=function(id){
 		success:function(data){
 		alert(data.des);
 	}});
-}
+};

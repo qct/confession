@@ -1,5 +1,5 @@
 module.exports=function(req,res,next){
-	if(req.path && req.path=='/create'){
+	if(req.body.content){
 		req.body.content=req.body.content.replace(/&/g,'&amp;')
 		.replace(/</g,'&lt;')
 		.replace(/>/g,'&gt;')

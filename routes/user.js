@@ -63,7 +63,7 @@ exports.createNormalUser = function(req, res, next) {
   });
   Post.
     find({ user_id : req.cookies.user_id }).
-    sort( '-updated_at' ).
+    sort( '-update_at' ).
     exec( function ( err, posts, count ){
       if( err ) return next( err );
       dateUtils.add_formatted_datestr(posts);
@@ -103,7 +103,7 @@ exports.logincheck = function(req, res, next) {
   
   Post.
     find({ user_id : req.cookies.user_id }).
-    sort( '-updated_at' ).
+    sort( '-update_at' ).
     exec( function ( err, posts, count ){
       if( err ) return next( err );
       dateUtils.add_formatted_datestr(posts);
