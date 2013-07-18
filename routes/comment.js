@@ -4,7 +4,6 @@ dateUtils=require('../dateUtils');
 exports.active=function(req,res,next){
   console.log("Enter into comment.");
   var reqObj=req.body;
-  console.log(reqObj);
   new Comment({
     user_id    : req.cookies.sid,
     content    : reqObj.content,
@@ -25,7 +24,6 @@ exports.show=function(req,res,next){
 		comments.forEach(function(comment){
 			dateUtils.update_content(comment);
 			dateUtils.add_datestr(comment);
-			console.log(comment.update_at_str);
 			var c={};
 			c.content=comment.content || "什么都没有说";
 			c.update_at=comment.update_at;

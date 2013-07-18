@@ -12,7 +12,7 @@ util.prototype.add_datestr = function (post) {
     post.update_at_str = moment(post.update_at.getTime()).fromNow();//.format("YYYY-MM-DD HH:mm:ss");
 };
 util.prototype.update_content = function(post){
-	var regPeople=/@.*?(?=&nbsp)/gi;
+	var regPeople=/@.*?((?=&nbsp)|(?= )|(?=$))/gi;
 	var regTag=/#[^#]*?#/gi;
 	post.content=String(post.content).replace(regPeople,function(people){
 		return "<a href="+global.urls.people+encodeURIComponent(people.substring(1))+">"+people+"</a>";

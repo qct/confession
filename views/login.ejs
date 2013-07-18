@@ -20,7 +20,7 @@
             <% if(!user) { %>
               <a href="/signup">注册</a>
             <% } else { %>
-            欢迎您，<%= user.displayName %>
+            欢迎您，<%= user.loginname %>
             <a href="/logout">注销</a>
             <% } %>
         </p>

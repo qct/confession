@@ -11,7 +11,7 @@ var dateUtils = require('../dateUtils');
 var idGen=require('../smodules/idGenerator');
 
 exports.index = function(req, res, next){
- 
+  
   Post.
     find({ user_id : req.cookies.user_id }).
     sort( '-update_at' ).
@@ -23,7 +23,7 @@ exports.index = function(req, res, next){
           title : '我忏悔 I Confess',
           posts : posts,
           count : count,
-          user  : req.user,
+          user  : req.session.user,
           notification:{
             commont:{count:1},
             reply:{count:2},
@@ -47,7 +47,6 @@ exports.show = function( req, res, next ){
 }
 exports.create = function ( req, res, next ){
  
-  console.log(Date.now());
   var content=req.body.content;
   var tags_tmp=content.match(/#[^#]*?#/gi);
   var tags=[];
@@ -56,15 +55,13 @@ exports.create = function ( req, res, next ){
       tags.push(str.substring(1,str.length-1));
     });
   }
-  console.log(content);
-  console.log(tags);
-  idGen(function(ids){
+  idGen.genArticleId(function(id){
     new Post({
       user_id    : req.cookies.user_id,
       content    : content,
       update_at  : Date.now(),
       author     : req.body.user,
-      id         : ids.articleid,
+      id         : id,
       tags       : tags
     }).save( function( err, post, count ){
       if( err ) return next( err );

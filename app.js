@@ -116,7 +116,7 @@ app.get('/auth/google/callback',
 });
 app.get('/logout', function(req, res){
   req.logout();
-  res.clearCookie("sid");
+  req.session.destroy();
   res.redirect('/');
 });
 

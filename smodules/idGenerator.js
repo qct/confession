@@ -1,28 +1,47 @@
 var mongoose = require( 'mongoose' );
 var Post     = mongoose.model( 'Post' );
-
-module.exports=(function(){
-	var ids={};
-	
+var User     = mongoose.model( 'User' );
+exports.genArticleId=(function(){
+	var id=0;
 	return function(callback){
-		if(!ids.articleid){
+		if(!id){
 			Post.find().sort('-id').limit(1).exec(function(err,posts,count){
 				if(err){
 					console.log(err);
 				}
 				if(posts && posts.length>0){
-					ids.articleid=posts[0].id+1;
+					id=posts[0].id+1;
 				}else{
-					ids.articleid=100001;
+					id=100001;
 				}
-				console.log("Finish init articleid:"+ids.articleid);
-				callback(ids);
+				console.log("Finish init articleid:"+id);
+				callback(id);
 	 		});
 		}else{
-			for(var k in ids){
-					ids[k]+=1;
-			}
-			callback(ids);
+			callback(id+1);
+		}
+	}
+})();
+
+
+exports.genUserId=(function(){
+	var id=0;
+	return function(callback){
+		if(!id){
+			User.find().sort('-id').limit(1).exec(function(err,posts,count){
+				if(err){
+					console.log(err);
+				}
+				if(posts && posts.length>0){
+					id=posts[0].id+1;
+				}else{
+					id=10000001;
+				}
+				console.log("Finish init articleid:"+id);
+				callback(id);
+	 		});
+		}else{
+			callback(id+1);
 		}
 	}
 })();
