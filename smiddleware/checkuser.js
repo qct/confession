@@ -1,9 +1,10 @@
 module.exports=function(req,res,next){
-	var paths=[];
+	var paths=[/^\/comment$/gi,/^\/create$/gi];
 	var needToRd=false;
 	paths.forEach(function(e){
 		if(e.test(req.path)){
-			if(!req.cookies.sid){
+			console.log(req.session.user);
+			if(!req.session.user){
 				needToRd=true;
 			}
 		}

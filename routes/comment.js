@@ -9,7 +9,7 @@ exports.active=function(req,res,next){
     content    : reqObj.content,
     post_id    : reqObj.post_id,
     update_at  : Date.now(),
-    author     : "吐吧-哥"
+    author     : req.session.user.loginname
   }).save(function(err,comment,count){
     res.send({result:true,code:200,des:"Success."})
   });
