@@ -18,7 +18,8 @@ exports.genArticleId=(function(){
 				callback(id);
 	 		});
 		}else{
-			callback(id+1);
+			id+=1;
+			callback(id);
 		}
 	}
 })();
@@ -41,7 +42,8 @@ exports.genUserId=(function(){
 				callback(id);
 	 		});
 		}else{
-			callback(id+1);
+			id+=1;
+			callback(id);
 		}
 	}
 })();
