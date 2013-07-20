@@ -19,7 +19,7 @@ var express = require('express')
   , crypto=require('crypto')
   , fs = require('fs')
   , path = require('path');
-
+var RedisStore=require('connect-redis')(express);
 
 global.urls={
   tags:"https://www.rosegun.com/t/",
@@ -74,7 +74,12 @@ app.use(express.favicon(__dirname+"/favicon.ico"));
 app.use(express.logger('dev'));
 app.use(express.cookieParser());
 app.use(express.bodyParser());
-app.use(express.session({ secret: 'keyboard cat' }));
+app.use(express.session({ 
+  secret: 'keyboard cat',
+  store:new RedisStore({
+    host:"rosegun.com"
+  })
+}));
 // app.use(express.methodOverride());
 app.use(passport.initialize());
 app.use(passport.session());
