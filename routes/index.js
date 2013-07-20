@@ -13,7 +13,7 @@ var idGen=require('../smodules/idGenerator');
 exports.index = function(req, res, next){
   
   Post.
-    find({ user_id : req.cookies.user_id }).
+    find().
     sort( '-update_at' ).
     exec( function ( err, posts, count ){
       if( err ) return next( err );
@@ -23,7 +23,7 @@ exports.index = function(req, res, next){
           title : '我忏悔 I Confess',
           posts : posts,
           count : count,
-          user  : req.session.user,
+          user  : req.session?req.session.user:null,
           notification:{
             commont:{count:1},
             reply:{count:2},
