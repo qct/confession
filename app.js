@@ -14,12 +14,17 @@ var express = require('express')
   , http = require('http')
   , escapehtml=require('./smiddleware/escapehtml')
   , checkuser=require('./smiddleware/checkuser.js')
+  , http = require('http')
+  , https = require('https')
+  , crypto=require('crypto')
+  , fs = require('fs')
   , path = require('path');
 
+
 global.urls={
-  tags:"http://www.rosegun.com/t/",
-  people:"http://www.rosegun.com/u/",
-  posts:"http://www.rosegun.com/p/"
+  tags:"https://www.rosegun.com/t/",
+  people:"https://www.rosegun.com/u/",
+  posts:"https://www.rosegun.com/p/"
 }
   // , moment = require('moment');
 
@@ -133,6 +138,18 @@ app.use(function(req,res){
   res.statusCode=404;
   res.send("<body align='center'><span style='font-weight:bold;font-family:consolas;font-size:50px;color:red;'>404!!</span><hr/><br/><img src='/images/404.jpg' style='border:0px;'/></body>")
 });
+
+
+
 http.createServer(app).listen(80, function(){
   console.log('Express server listening on port 80' );
+});
+
+
+var options = {
+  key: fs.readFileSync(__dirname+'/cert/www.rosegun.com.key.unsecure'),
+  cert: fs.readFileSync(__dirname+'/cert/www.rosegun.com.crt')
+};
+https.createServer(options,app).listen(443, function(){
+    console.log('Express https server listening on port 443' );
 });
