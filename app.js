@@ -136,7 +136,7 @@ app.post('/logincheck', users.logincheck);
 app.get('/signup', users.signup);
 app.post('/signupsave', users.createNormalUser);
 
-
+app.get('/test',routes.test);
 
 
 app.use(function(req,res){

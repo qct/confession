@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>test</title>
+     <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+  </head>
+  <body>
+  	<table class="table">
+  		<tr><td>时间</td><td>事件</td><td>重要度</td><td>前值</td><td>预测</td><td>结果</td></tr>
+  		<%
+  		for(var i=0;i<data.length;i++){
+  		%>
+  		<tr <%=(i%2==1)?"class='info'":""%>>
+  			<td><%=data[i].date%>&nbsp;<%=data[i].time%></td>
+  			<td><%=data[i].affair%></td>
+  			<td><%=data[i].importance%></td>
+  			<td><%=data[i].beforeData%></td>
+  			<td><%=data[i].forecast%></td>
+  			<td><%=data[i].result%></td>
+  		</tr>
+  		<%}%>
+  	</table>
+  </body>
+  </html>

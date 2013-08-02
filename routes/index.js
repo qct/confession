@@ -1,4 +1,6 @@
-
+var $=require('jquery'),
+http=require('http'),
+moment=require('moment');
 /*
  * GET home page.
  */
@@ -127,3 +129,19 @@ exports.current_user = function ( req, res, next ){
   }
 
 };
+exports.test = function(req,res){
+  var url="http://kp.cngold.org/sgapp/financeCalendar/index.do?"
+  url+="date="+moment().format("YYYY-MM-DD");
+  url+="&rn="+encodeURIComponent(String(new Date()));
+  http.get(url,function(response){
+    var html='';
+    response.on("data",function(data){
+      html+=String(data);
+    });
+    response.on("end",function(){
+      eval(html);
+      var obj=eval("("+financeCalendar+")");
+      res.render("test",{data:obj.financeData});
+    })
+  }); 
+}
